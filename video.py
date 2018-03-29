@@ -1,6 +1,11 @@
+import imageio
+
+imageio.plugins.ffmpeg.download()
+
 from moviepy.editor import ImageSequenceClip
 import argparse
 import os
+
 
 IMAGE_EXT = ['jpeg', 'gif', 'png', 'jpg']
 
