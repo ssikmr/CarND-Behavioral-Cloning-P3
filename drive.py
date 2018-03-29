@@ -11,6 +11,7 @@ import eventlet.wsgi
 from PIL import Image
 from flask import Flask
 from io import BytesIO
+import tensorflow as tf
 
 from keras.models import load_model
 import h5py
@@ -44,7 +45,7 @@ class SimplePIController:
 
 
 controller = SimplePIController(0.1, 0.002)
-set_speed = 5
+set_speed = 3
 controller.set_desired(set_speed)
 
 
@@ -63,7 +64,7 @@ def telemetry(sid, data):
         image_array = np.asarray(image)
         #CROPPED and RESIZE
         image_array=image_array[60:140,:,:]
-        image_array=cv2.resize(image_array, (64,64))
+        #image_array=cv2.resize(image_array, (64,64))
         
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
